@@ -17,9 +17,9 @@ class ArchitecturalTests: XCTestCase {
                 return CounterState(counter: state.counter - 1)
             }
         }
-        let store = await Store(initialState: initialState, reducer: reducer)
+        let store = Store(initialState: initialState, reducer: reducer)
         let spy = CounterStateSpy()
-        await spy.subscribe(publisher: store.updates)
+        spy.subscribe(publisher: store.updates)
 
         XCTAssert(spy.observedValues == [0], "spy observed initial value state")
 

@@ -3,7 +3,6 @@
 import Combine
 import Foundation
 
-@StateActor
 public class Store<ST: State, ACT: Action>: StatePublisher, ActionExecutor {
 
     public typealias Reducer = (_ state: ST, _ action: ACT) -> ST
@@ -24,6 +23,7 @@ public class Store<ST: State, ACT: Action>: StatePublisher, ActionExecutor {
 
     // MARK: - ActionExecutor
 
+    @StateActor
     public func execute(_ action: ACT) async {
         state.send(reducer(state.value, action))
     }

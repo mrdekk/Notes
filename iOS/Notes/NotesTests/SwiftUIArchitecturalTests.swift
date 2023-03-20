@@ -19,10 +19,10 @@ class SwiftUIArchitecturalTests: XCTestCase {
                 return CounterState(counter: state.counter - 1)
             }
         }
-        let store = await Store(initialState: initialState, reducer: reducer)
+        let store = Store(initialState: initialState, reducer: reducer)
 
         let viewModel = CountView.ViewModel()
-        viewModel.upstreamConnection = await store.updates
+        viewModel.upstreamConnection = store.updates
             .receive(on: RunLoop.main)
             .sink { value in
                 viewModel.counterValue = value.counter
