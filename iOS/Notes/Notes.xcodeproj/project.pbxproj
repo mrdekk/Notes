@@ -18,6 +18,9 @@
 		94EAF34F29C837CA005F62EC /* ActionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF34E29C837CA005F62EC /* ActionExecutor.swift */; };
 		94EAF35129C83B27005F62EC /* StatePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF35029C83B27005F62EC /* StatePublisher.swift */; };
 		94EAF36029C83C0F005F62EC /* ArchitecturalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF35F29C83C0F005F62EC /* ArchitecturalTests.swift */; };
+		94EAF36329C87B4B005F62EC /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 94EAF36229C87B4B005F62EC /* SnapshotTesting */; };
+		94EAF36529C87BA8005F62EC /* SwiftUIArchitecturalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF36429C87BA8005F62EC /* SwiftUIArchitecturalTests.swift */; };
+		94EAF36829C8E2BA005F62EC /* StateActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF36629C8E2B7005F62EC /* StateActor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 		94EAF35029C83B27005F62EC /* StatePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatePublisher.swift; sourceTree = "<group>"; };
 		94EAF35629C83BFF005F62EC /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94EAF35F29C83C0F005F62EC /* ArchitecturalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchitecturalTests.swift; sourceTree = "<group>"; };
+		94EAF36429C87BA8005F62EC /* SwiftUIArchitecturalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIArchitecturalTests.swift; sourceTree = "<group>"; };
+		94EAF36629C8E2B7005F62EC /* StateActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateActor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EAF36329C87B4B005F62EC /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +123,7 @@
 				94EAF34529C83312005F62EC /* Store.swift */,
 				94EAF34B29C83765005F62EC /* Action */,
 				94EAF34229C831D3005F62EC /* State */,
+				94EAF36629C8E2B7005F62EC /* StateActor.swift */,
 			);
 			path = Architectural;
 			sourceTree = "<group>";
@@ -151,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				94EAF35F29C83C0F005F62EC /* ArchitecturalTests.swift */,
+				94EAF36429C87BA8005F62EC /* SwiftUIArchitecturalTests.swift */,
 			);
 			path = NotesTests;
 			sourceTree = "<group>";
@@ -189,6 +197,9 @@
 				94EAF35B29C83BFF005F62EC /* PBXTargetDependency */,
 			);
 			name = NotesTests;
+			packageProductDependencies = (
+				94EAF36229C87B4B005F62EC /* SnapshotTesting */,
+			);
 			productName = NotesTests;
 			productReference = 94EAF35629C83BFF005F62EC /* NotesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -221,6 +232,9 @@
 				Base,
 			);
 			mainGroup = 94EAF32629C82D22005F62EC;
+			packageReferences = (
+				94EAF36129C87B4B005F62EC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 94EAF33029C82D22005F62EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,6 +273,7 @@
 				94EAF34D29C837A9005F62EC /* Action.swift in Sources */,
 				94EAF34A29C83639005F62EC /* Dispatching.swift in Sources */,
 				94EAF33329C82D22005F62EC /* NotesApp.swift in Sources */,
+				94EAF36829C8E2BA005F62EC /* StateActor.swift in Sources */,
 				94EAF34F29C837CA005F62EC /* ActionExecutor.swift in Sources */,
 				94EAF34429C831DD005F62EC /* State.swift in Sources */,
 				94EAF34629C83312005F62EC /* Store.swift in Sources */,
@@ -271,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94EAF36029C83C0F005F62EC /* ArchitecturalTests.swift in Sources */,
+				94EAF36529C87BA8005F62EC /* SwiftUIArchitecturalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +544,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94EAF36129C87B4B005F62EC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94EAF36229C87B4B005F62EC /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94EAF36129C87B4B005F62EC /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94EAF32729C82D22005F62EC /* Project object */;
 }

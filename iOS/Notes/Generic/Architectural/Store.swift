@@ -3,18 +3,17 @@
 import Combine
 import Foundation
 
+@StateActor
 public class Store<ST: State, ACT: Action>: StatePublisher, ActionExecutor {
 
     public typealias Reducer = (_ state: ST, _ action: ACT) -> ST
 
     private let state: CurrentValueSubject<ST, Never>
     private let reducer: Reducer
-    private let syncQueue: DispatchingQueue
 
-    init(initialState: ST, reducer: @escaping Reducer, syncQueue: DispatchingQueue) {
+    init(initialState: ST, reducer: @escaping Reducer) {
         self.state = .init(initialState)
         self.reducer = reducer
-        self.syncQueue = syncQueue
     }
 
     // MARK: - StateObserver
@@ -26,9 +25,6 @@ public class Store<ST: State, ACT: Action>: StatePublisher, ActionExecutor {
     // MARK: - ActionExecutor
 
     public func execute(_ action: ACT) async {
-        syncQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.state.send(self.reducer(self.state.value, action))
-        }
+        state.send(reducer(state.value, action))
     }
 }

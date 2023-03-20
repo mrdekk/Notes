@@ -7,7 +7,6 @@ import XCTest
 
 class ArchitecturalTests: XCTestCase {
     func testBasicSetup() async throws {
-        let actorQueue = FakeDispatchingQueue() // not DispatchQueue(label: "CounterTest.sync")
         let initialState = CounterState(counter: 0)
         let reducer = { (_ state: CounterState, _ action: CounterState.Actions) -> CounterState in
             switch action {
@@ -18,34 +17,18 @@ class ArchitecturalTests: XCTestCase {
                 return CounterState(counter: state.counter - 1)
             }
         }
-        let store = Store(
-            initialState: initialState,
-            reducer: reducer,
-            syncQueue: actorQueue
-        )
+        let store = await Store(initialState: initialState, reducer: reducer)
         let spy = CounterStateSpy()
-        spy.subscribe(publisher: store.updates)
+        await spy.subscribe(publisher: store.updates)
 
         XCTAssert(spy.observedValues == [0], "spy observed initial value state")
 
         await store.execute(.increment)
 
-        XCTAssert(actorQueue.pendingAsyncs.count == 1, "there is pending state changing reducer activation (increment)")
-        XCTAssert(spy.observedValues == [0], "spy observes only initial state")
-
-        actorQueue.executeAsyncs()
-
-        XCTAssert(actorQueue.pendingAsyncs.isEmpty, "there is no pending state changing reducer activation")
         XCTAssert(spy.observedValues == [0, 1], "spy observes initial state and increment modification")
 
         await store.execute(.decrement)
 
-        XCTAssert(actorQueue.pendingAsyncs.count == 1, "there is pending state changing reducer activation (decrement)")
-        XCTAssert(spy.observedValues == [0, 1], "spy observes initial state and increment modification")
-
-        actorQueue.executeAsyncs()
-
-        XCTAssert(actorQueue.pendingAsyncs.isEmpty, "there is no pending state changing reducer activation")
         XCTAssert(spy.observedValues == [0, 1, 0], "spy observes initial state and both (increment, decrement) modifications")
     }
 }
