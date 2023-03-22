@@ -9,6 +9,7 @@ public protocol ActionExecutor {
 }
 
 public extension ActionExecutor {
+    @discardableResult
     func send(_ action: ACT) -> Task<Void, Never> {
         Task {
             await execute(action)
