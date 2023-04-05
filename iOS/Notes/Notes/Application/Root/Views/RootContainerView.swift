@@ -17,9 +17,9 @@ struct RootContainerView<HV: View, V: View, M: View, S: View>: View {
     private let makeSettingsView: () -> S
 
     @ObservedObject private var viewModel: ViewModel
+    private let selectedTabBinding: Binding<WorkMode>
 
     typealias NotifyTabSwitched = (_ tab: WorkMode) -> Void
-
     private let notifyTabSwitched: NotifyTabSwitched
 
     init(
@@ -36,39 +36,40 @@ struct RootContainerView<HV: View, V: View, M: View, S: View>: View {
         self.makeVaultView = makeVaultView
         self.makeMapView = makeMapView
         self.makeSettingsView = makeSettingsView
-    }
 
-    var body: some View {
-        let selectedTabBinding = Binding(
+        self.selectedTabBinding = Binding(
             get: { viewModel.selectedTab },
             set: { value in notifyTabSwitched(value) }
         )
+    }
+
+    var body: some View {
         return TabView(selection: selectedTabBinding) {
             NavigationView {
                 makeHomeView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle("Главная")
+                    .navigationTitle(l10n.Home.title)
                     .background(Color.black.opacity(0.2))
             }
                 .tag(WorkMode.notes)
                 .tabItem {
-                    Label("Главная", systemImage: "house")
+                    Label(l10n.Home.title, systemImage: l10n.Home.image)
                 }
             makeVaultView()
                 .tag(WorkMode.vault)
                 .tabItem {
-                    Label("Копилка", systemImage: "externaldrive")
+                    Label(l10n.Vault.title, systemImage: l10n.Vault.image)
                 }
             makeMapView()
                 .tag(WorkMode.geo)
                 .tabItem {
-                    Label("Гео", systemImage: "mappin.and.ellipse")
+                    Label(l10n.Geo.title, systemImage: l10n.Geo.image)
                 }
             makeSettingsView()
                 .tag(WorkMode.profile)
                 .tabItem {
-                    Label("Настройки", systemImage: "person.circle")
+                    Label(l10n.Settings.title, systemImage: l10n.Settings.image)
                 }
         }
     }

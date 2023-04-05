@@ -26,6 +26,8 @@
 		94EAF37229CA3C01005F62EC /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF37129CA3C01005F62EC /* RootState.swift */; };
 		94EAF37429CA3CEE005F62EC /* RootGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF37329CA3CEE005F62EC /* RootGraph.swift */; };
 		94EAF37729CAD0D9005F62EC /* WorkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EAF37629CAD0D9005F62EC /* WorkMode.swift */; };
+		94F4BC6329DC22B0002E4DD0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F4BC6229DC22B0002E4DD0 /* Strings.swift */; };
+		94FFBA2329D3664000EE413A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94FFBA2529D3664000EE413A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,9 @@
 		94EAF37129CA3C01005F62EC /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
 		94EAF37329CA3CEE005F62EC /* RootGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootGraph.swift; sourceTree = "<group>"; };
 		94EAF37629CAD0D9005F62EC /* WorkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkMode.swift; sourceTree = "<group>"; };
+		94F4BC6229DC22B0002E4DD0 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		94FFBA2429D3664000EE413A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94FFBA2629D3664200EE413A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +107,8 @@
 		94EAF33129C82D22005F62EC /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				94F4BC6129DC22B0002E4DD0 /* Generated */,
+				94FFBA2029D3662100EE413A /* Resources */,
 				94EAF36929C8EDD3005F62EC /* Application */,
 				94EAF33229C82D22005F62EC /* NotesApp.swift */,
 				94EAF33429C82D22005F62EC /* ContentView.swift */,
@@ -218,6 +225,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		94F4BC6129DC22B0002E4DD0 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				94F4BC6229DC22B0002E4DD0 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		94FFBA2029D3662100EE413A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94FFBA2529D3664000EE413A /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,6 +248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94EAF33D29C82D22005F62EC /* Build configuration list for PBXNativeTarget "Notes" */;
 			buildPhases = (
+				94F4BC6429DC263E002E4DD0 /* ShellScript */,
 				94EAF32B29C82D22005F62EC /* Sources */,
 				94EAF32C29C82D22005F62EC /* Frameworks */,
 				94EAF32D29C82D22005F62EC /* Resources */,
@@ -234,6 +258,8 @@
 			dependencies = (
 			);
 			name = Notes;
+			packageProductDependencies = (
+			);
 			productName = Notes;
 			productReference = 94EAF32F29C82D22005F62EC /* Notes.app */;
 			productType = "com.apple.product-type.application";
@@ -285,6 +311,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 94EAF32629C82D22005F62EC;
 			packageReferences = (
@@ -306,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94EAF33A29C82D22005F62EC /* Preview Assets.xcassets in Resources */,
+				94FFBA2329D3664000EE413A /* Localizable.strings in Resources */,
 				94EAF33729C82D22005F62EC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +347,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		94F4BC6429DC263E002E4DD0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/opt/homebrew/bin/swiftgen config run\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		94EAF32B29C82D22005F62EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -331,6 +379,7 @@
 				94EAF34A29C83639005F62EC /* Dispatching.swift in Sources */,
 				94EAF33329C82D22005F62EC /* NotesApp.swift in Sources */,
 				94EAF36829C8E2BA005F62EC /* StateActor.swift in Sources */,
+				94F4BC6329DC22B0002E4DD0 /* Strings.swift in Sources */,
 				94EAF37229CA3C01005F62EC /* RootState.swift in Sources */,
 				94EAF34F29C837CA005F62EC /* ActionExecutor.swift in Sources */,
 				94EAF34429C831DD005F62EC /* State.swift in Sources */,
@@ -359,6 +408,18 @@
 			targetProxy = 94EAF35A29C83BFF005F62EC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		94FFBA2529D3664000EE413A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94FFBA2429D3664000EE413A /* en */,
+				94FFBA2629D3664200EE413A /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		94EAF33B29C82D22005F62EC /* Debug */ = {

@@ -1,0 +1,24 @@
+
+/* icon for geo page */
+"geo.image" = "mappin.and.ellipse";
+
+/* game page title */
+"geo.title" = "Гео";
+
+/* icon for home page */
+"home.image" = "house";
+
+/* home page title */
+"home.title" = "Главная";
+
+/* icon for settings page */
+"settings.image" = "person.circle";
+
+/* settings page title */
+"settings.title" = "Настройки";
+
+/* icon for vault page */
+"vault.image" = "externaldrive";
+
+/* vault page title */
+"vault.title" = "Копилка";

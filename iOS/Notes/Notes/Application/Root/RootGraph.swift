@@ -4,6 +4,7 @@ import Foundation
 import SwiftUI
 
 final class RootGraph {
+
     private let store: Store<RootState, RootState.Actions>
 
     init() {

@@ -1,0 +1,9 @@
+input_dir: ./Notes/Resources
+output_dir: ./Notes/Generated/
+strings:
+  inputs: en.lproj
+  outputs:
+    templateName: structured-swift5
+    output: Strings.swift
+    params:
+      enumName: l10n
