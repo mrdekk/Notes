@@ -22,3 +22,15 @@
 
 /* vault page title */
 "vault.title" = "Копилка";
+
+/* weekdays */
+"weekday.mon" = "Пон";
+"weekday.tue" = "Втр";
+"weekday.wed" = "Срд";
+"weekday.thu" = "Чтв";
+"weekday.fri" = "Птн";
+"weekday.sat" = "Сбт";
+"weekday.sun" = "Вск";
+"weekday.whole" = "Всю неделю";
+"weekday.end" = "По выходным";
+"weekday.days" = "По будням";

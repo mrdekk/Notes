@@ -50,7 +50,6 @@ struct RootContainerView<HV: View, V: View, M: View, S: View>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationTitle(l10n.Home.title)
-                    .background(Color.black.opacity(0.2))
             }
                 .tag(WorkMode.notes)
                 .tabItem {

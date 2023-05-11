@@ -7,6 +7,16 @@ final class RootGraph {
 
     private let store: Store<RootState, RootState.Actions>
 
+    private lazy var homeGraph: HomeGraph = {
+        HomeGraph(
+            categories: dataGraph.categories
+        )
+    }()
+
+    private lazy var dataGraph: DataGraph = {
+        DataGraph()
+    }()
+
     init() {
         self.store = Store(
             initialState: RootState(currentWorkMode: .notes),
@@ -17,25 +27,34 @@ final class RootGraph {
 
 extension RootGraph {
     func makeRootContainerView() -> some View {
-        let vm = RootContainerView<ContentView, ContentView, ContentView, ContentView>.ViewModel()
+        let vm = RootContainerView<HomeView, ContentView, ContentView, ContentView>.ViewModel()
         vm.cancellable = store.updates
             .receive(on: RunLoop.main)
-            .sink { value in
-                vm.selectedTab = value.currentWorkMode
+            .map { value in
+                value.currentWorkMode
+            }
+            .removeDuplicates()
+            .sink { mode in
+                vm.selectedTab = mode
             }
 
         return RootContainerView(
             viewModel: vm,
             notifyTabSwitched: { [weak self] newMode in
-                guard let self = self else { return }
-                self.store.send(.switchWorkMode(mode: newMode))
+                self?.store.send(.switchWorkMode(mode: newMode))
             },
-            makeHomeView: {
+            makeHomeView: { [homeGraph] in
+                homeGraph.makeHomeView()
+            },
+            makeVaultView: {
                 ContentView()
             },
-            makeVaultView: { ContentView() },
-            makeMapView: { ContentView() },
-            makeSettingsView: { ContentView() }
+            makeMapView: {
+                ContentView()
+            },
+            makeSettingsView: {
+                ContentView()
+            }
         )
     }
 }

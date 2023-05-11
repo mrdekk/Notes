@@ -22,3 +22,15 @@
 
 /* vault page title */
 "vault.title" = "Vault";
+
+/* weekdays */
+"weekday.mon" = "Mon";
+"weekday.tue" = "Tue";
+"weekday.wed" = "Wed";
+"weekday.thu" = "Thu";
+"weekday.fri" = "Fri";
+"weekday.sat" = "Sat";
+"weekday.sun" = "Sun";
+"weekday.whole" = "Every day";
+"weekday.end" = "Weekend";
+"weekday.days" = "Week days";
