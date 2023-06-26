@@ -7,28 +7,37 @@ struct HomeView: View {
 
     class ViewModel: ObservableObject {
         @Published var categories: [Category] = []
-        var cancellable: Cancellable?
+        @Published var isAddingCategory: Bool = false
+        var cancellable: Set<AnyCancellable> = Set()
     }
 
     @ObservedObject private var viewModel: ViewModel
 
-    typealias AddCategoryClickAction = () -> Void
+    typealias AddCategoryClickAction = (_ show: Bool) -> Void
     private let addCategoryClickAction: AddCategoryClickAction
 
+    private let isAddingCategoryBinding: Binding<Bool>
+
     var body: some View {
-        HomeCategoriesView(categories: $viewModel.categories)
-            .background(Color.black.opacity(0.2))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .toolbar {
-                Button(
-                    action: {
-                        addCategoryClickAction()
-                    },
-                    label: {
-                        Image(systemName: "folder.fill.badge.plus")
-                    }
-                )
+        ZStack {
+            NavigationLink("Add Category", isActive: isAddingCategoryBinding) {
+                ContentView()
             }
+                .hidden()
+            HomeCategoriesView(categories: $viewModel.categories)
+                .background(Color.black.opacity(0.2))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .toolbar {
+                    Button(
+                        action: {
+                            addCategoryClickAction(true)
+                        },
+                        label: {
+                            Image(systemName: "folder.fill.badge.plus")
+                        }
+                    )
+                }
+        }
     }
 
     init(
@@ -37,6 +46,11 @@ struct HomeView: View {
     ) {
         self.viewModel = viewModel
         self.addCategoryClickAction = addCategoryClickAction
+
+        self.isAddingCategoryBinding = Binding(
+            get: { viewModel.isAddingCategory },
+            set: { value in addCategoryClickAction(value) }
+        )
     }
 }
 
@@ -44,9 +58,10 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = HomeView.ViewModel()
         vm.categories = []
+        vm.isAddingCategory = false
         return HomeView(
             viewModel: vm,
-            addCategoryClickAction: {}
+            addCategoryClickAction: { _ in }
         )
     }
 }

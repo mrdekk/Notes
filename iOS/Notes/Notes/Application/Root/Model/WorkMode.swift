@@ -8,3 +8,8 @@ enum WorkMode: CaseIterable {
     case geo
     case profile
 }
+
+enum NotesWorkMode: CaseIterable {
+    case categoriesList
+    case addCategory
+}
