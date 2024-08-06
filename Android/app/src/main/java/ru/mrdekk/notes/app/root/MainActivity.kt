@@ -9,10 +9,11 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ru.mrdekk.notes.generic.di.Injectable
 import ru.mrdekk.notes.generic.di.inject
 import ru.mrdekk.notes.ui.theme.NotesTheme
 
-class MainActivity : ComponentActivity(), RootGraphInjectable {
+class MainActivity : ComponentActivity(), Injectable {
 
     lateinit var makeRootView: @Composable () -> Unit
 

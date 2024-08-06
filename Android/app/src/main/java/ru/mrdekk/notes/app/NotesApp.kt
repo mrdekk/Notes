@@ -6,5 +6,5 @@ import ru.mrdekk.notes.generic.di.Injector
 
 class NotesApp(
     private val graph: AppGraph = AppGraph()
-): Application(), Injector<Injectable> by graph {
+): Application(), Injector by graph {
 }

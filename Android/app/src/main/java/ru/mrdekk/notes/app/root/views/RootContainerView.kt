@@ -1,6 +1,10 @@
 package ru.mrdekk.notes.app.root.views
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.Tab
@@ -19,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.flow.Flow
 import ru.mrdekk.notes.app.root.model.WorkMode
+import ru.mrdekk.notes.app.root.model.icon
 import ru.mrdekk.notes.app.root.model.title
 
 @Composable
@@ -31,7 +36,9 @@ fun RootContainerView(
     val currentWorkMode = workMode.collectAsState(initial = WorkMode.Notes)
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        makeScreenView(currentWorkMode.value)
+        Row(modifier = Modifier.weight(1f)) {
+            makeScreenView(currentWorkMode.value)
+        }
         TabRow(selectedTabIndex = modes.indexOf(currentWorkMode.value)) {
             modes.forEachIndexed { index, tab ->
                 Tab(
@@ -39,7 +46,7 @@ fun RootContainerView(
                     selected = currentWorkMode == modes[index],
                     onClick = { onWorkModeChange(modes[index]) },
                     icon = {
-                        Icon(imageVector = Icons.Default.Home, contentDescription = null)
+                        Icon(imageVector = tab.icon(), contentDescription = null)
                     }
                 )
             }

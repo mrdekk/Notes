@@ -1,5 +1,5 @@
 package ru.mrdekk.notes.generic.di
 
-interface Injector<INJ: Injectable> {
-    fun inject(target: INJ)
+interface Injector {
+    fun inject(target: Injectable): Boolean
 }

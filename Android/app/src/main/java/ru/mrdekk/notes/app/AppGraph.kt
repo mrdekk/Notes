@@ -1,20 +1,21 @@
 package ru.mrdekk.notes.app
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import ru.mrdekk.notes.app.root.RootGraph
-import ru.mrdekk.notes.app.root.RootGraphInjectable
-import ru.mrdekk.notes.generic.di.InjectException
-import ru.mrdekk.notes.generic.di.Injectable
-import ru.mrdekk.notes.generic.di.Injector
+import ru.mrdekk.notes.generic.arch.Store
+import ru.mrdekk.notes.generic.di.CompositeGraph
+import ru.mrdekk.notes.generic.di.Graph
 
-class AppGraph : Injector<Injectable> {
-    private val rootGraph = RootGraph()
+class AppGraph : CompositeGraph() {
+    private val coroutineScope = CoroutineScope(Job())
+    private val actor = Store.createStoreActor(coroutineScope = coroutineScope)
 
-    override fun inject(target: Injectable) = when(target) {
-        is RootGraphInjectable -> {
-            rootGraph.inject(target)
-        }
-        else -> {
-            throw InjectException("Unknown injectable target")
-        }
-    }
+    private val rootGraph = RootGraph(
+        coroutineScope = coroutineScope,
+        actor = actor
+    )
+
+    override val subgraphs: Set<Graph>
+        get() = setOf<Graph>(rootGraph)
 }

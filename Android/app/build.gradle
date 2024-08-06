@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'ru.mrdekk.notes'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "ru.mrdekk.notes"
@@ -37,7 +37,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerExtensionVersion '1.5.2'
     }
     packagingOptions {
         resources {
@@ -48,19 +48,23 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.2.0'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
+    implementation 'androidx.activity:activity-compose:1.9.1'
+    implementation "androidx.compose.ui:ui:1.6.8"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.6.8"
+    implementation 'androidx.compose.material:material:1.6.8'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+    implementation "androidx.compose.material:material-icons-extended:1.6.8"
+
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.6.8"
+
+    debugImplementation "androidx.compose.ui:ui-tooling:1.6.8"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:1.6.8"
 }
