@@ -8,11 +8,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ru.mrdekk.notes.app.home.HomeGraph
 import ru.mrdekk.notes.app.root.model.WorkMode
 import ru.mrdekk.notes.app.root.state.RootState
 import ru.mrdekk.notes.app.root.views.RootContainerView
 import ru.mrdekk.notes.generic.arch.Store
 import ru.mrdekk.notes.generic.arch.StoreActor
+import ru.mrdekk.notes.generic.di.CompositeGraph
 import ru.mrdekk.notes.generic.di.Graph
 import ru.mrdekk.notes.generic.di.InjectException
 import ru.mrdekk.notes.generic.di.Injectable
@@ -21,13 +23,18 @@ import ru.mrdekk.notes.generic.di.Injector
 class RootGraph(
     coroutineScope: CoroutineScope,
     actor: StoreActor
-): Graph() {
+): CompositeGraph() {
+
+    private var homeGraph = HomeGraph()
 
     private val store: Store <RootState, RootState.Actions>
 
+    override val subgraphs: Set<Graph>
+        get() = setOf()
+
     init {
         store = Store(
-            initialState = RootState(currentWorkMode = WorkMode.Profile),
+            initialState = RootState(currentWorkMode = WorkMode.Notes),
             reducer = RootState.provideReducer(),
             coroutineScope = coroutineScope,
             actor = actor
@@ -36,7 +43,7 @@ class RootGraph(
 
     override fun inject(target: Injectable): Boolean = when (target) {
         is MainActivity -> inject(target)
-        else -> false
+        else -> super.inject(target)
     }
     
     private fun inject(mainActivity: MainActivity): Boolean {
@@ -46,9 +53,9 @@ class RootGraph(
         mainActivity.makeRootView = {
             RootContainerView(
                 mode,
-                {
+                makeScreenView = {
                     when (it) {
-                        WorkMode.Notes -> Text("Notes Screen")
+                        WorkMode.Notes -> homeGraph.makeHomeView()
                         WorkMode.Vault -> Text("Vault Screen")
                         WorkMode.Geo -> Text("Geo screen")
                         WorkMode.Profile -> Text("Profile screen")
